@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  get 'welcome/index'
+
   get 'posts/index'
 
   get 'posts/show'
