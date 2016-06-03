@@ -1,5 +1,6 @@
 class NotesController < ApplicationController
-
+  before_action :find_note, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @notes = Note.where(user_id: current_user)
@@ -35,17 +36,16 @@ class NotesController < ApplicationController
 
   def destroy
     @note.destroy
-    redirect_to notes_path
+    redirect_to @note
   end
 
   private
+
   def find_note
     @note = Note.find(params[:id])
-
   end
 
   def note_params
     params.require(:note).permit(:title, :content)
-
   end
 end

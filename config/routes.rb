@@ -1,21 +1,12 @@
 Rails.application.routes.draw do
-
-  get 'welcome/index'
-
-  get 'posts/index'
-
-  get 'posts/show'
-
-  get 'posts/new'
-
-  get 'posts/create'
-
-  get 'posts/edit'
-
-  get 'posts/update'
-
-  get 'posts/destroy'
+  resources :notes
 
   devise_for :users
-  root 'notes#index'
+  get 'welcome/index'
+
+  authenticated :user do
+    root "notes#index", as: "authenticated_root"
+  end
+
+  root "welcome#index"
 end
